@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/agriculture.schema.json",
+  "title": "UC1 Agriculture",
+  "description": "The specifications of what action should be taken on what field",
+  "type": "object",
+  "properties": {
+    "field": {
+      "description": "What kind of field that should be used",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "entry": {
+          "type": "string"
+        }
+      }
+    },
+    "process": {
+      "description": "The action that should be applied to the field",
+      "type": "object",
+      "properties": {
+        "process_id": {
+          "type": "string"
+        },
+        "movement": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "specification": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["field", "process"]
+}

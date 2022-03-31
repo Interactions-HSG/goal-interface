@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/manufacturing.schema.json",
+  "title": "UC3 Manufacturing",
+  "description": "The specifications for drawing text on a certain material from a user form",
+  "type": "object",
+  "properties": {
+    "material": {
+      "description": "The type of material the machine should draw on",
+      "type": "string"
+    },
+    "process": {
+      "description": "What method is used to draw the text",
+      "type": "string"
+    },
+    "drawings": {
+      "description": "The properties of the text that should be drawn on the material",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "position": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              }
+            }
+          },
+          "size": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["material", "process", "drawings"]
+}

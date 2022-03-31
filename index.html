@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <title>Hypermedia MAS Explorer | IntellIoT</title>
+
+  <link rel="stylesheet" type="text/css" href="./css/header.css">
+  <link rel="stylesheet" type="text/css" href="./css/manufacturing.css">
+  <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
+  <link rel="stylesheet" type="text/css" href="./css/material.min.css">
+  <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	crossorigin="anonymous">
+</head>
+
+<body style='overflow: auto;'>
+
+  <!-- This is the top bar -->
+  <div id="header">
+    <div class="logo"><img src="./img/interactions-logo-pure-white.png" alt="Interactions Research Group, University of St.Gallen" class="logo"/></div>
+    <div class="logo-right"><img src="./img/IntellIoT-Logo.png" alt="IntellIoT Research Project" class="logo"/></div>
+
+    <div id="settings">
+      <div id="fetch-artifacts-text">Fetch Artifacts from</div>
+      <select id="workspace-chooser"><option value="simulation">infrastructure-running-?</option></select>
+      <!-- <div id="back-button" class="back-button"><i class="material-icons">skip_previous</i></div> -->
+    </div>
+
+    <div id="header-options-container" class="hidden">
+
+    </div>
+    <div id="spacer"></div>
+    <div id="impressum">
+      <a href="https://interactions.ics.unisg.ch" target="_new">Interactions Research Group, University of St.Gallen</a><br/>
+      <a href="http://intelliot.eu/" target="_new">IntellIoT Project (EU H2020 #957218)</a></div>
+  </div>
+
+  <!-- This is the container that hosts all other interface elements -->
+  <div id="container">
+    <div id="manufacturingForm">
+      <form>
+      <div>
+        <label for="material">Material:</label><br>
+        <select class="form-control" required="required" id="materialSelect">
+          <option value="metal">Metal</option>
+          <option value="wood">Wood</option>
+        </select>
+        <br>
+      </div>
+      <div>
+        <label for="process">Process:</label><br>
+        <select class="form-control" required="required" id="processSelect" onchange="setText()">
+          <option value="laser">Laser</option>
+          <option value="engraving">Engraving</option>
+        </select>
+      </div>
+      <div>
+        <label for="text">Text:</label><br>
+        <input type="text" id="text" name="text" onchange="setText()">
+      </div>
+      <div>
+        <label for="posx">Position X:</label><br>
+        <input type="number" id="posx" name="posx" value="45">
+      </div>
+      <div>
+        <label for="posy">Position Y:</label><br>
+        <input type="number" id="posy" name="posy" value="70">
+      </div>
+      <div>
+        <label for="sizex">Size X:</label><br>
+        <input type="number" id="sizex" name="sizex">
+      </div>
+      <div>
+        <label for="sizey">Size Y:</label><br>
+        <input type="number" id="sizey" name="sizey">
+      </div>
+      <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div id="previewImage">
+      <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .small { font: italic 13px sans-serif; }
+          .heavy { font: bold 30px sans-serif; }
+      
+          /* Note that the color of the text is set with the    *
+           * fill property, the color property is for HTML only */
+          .Rrrrr { font: italic 40px serif; fill: red; }
+        </style>
+        <image id="previewMaterial" href="img/wood.jpg" height="120" width="120"/>
+        <text id="previewText" x="70" y="100" class="small"></text>
+      </svg>
+    </div>
+  </div>
+
+
+  
+
+  <!-- Script imports and startup call -->
+
+  <script type="text/javascript">
+    var form = document.getElementById("manufacturingForm");
+    form.addEventListener("input", function (){
+      document.getElementById("previewText").textContent = document.getElementById("text").value;
+      var x_text = document.getElementById("posx").value;
+      var y_text = document.getElementById("posy").value;
+      document.getElementById("previewText").setAttribute("x", x_text);
+      document.getElementById("previewText").setAttribute("y", y_text);
+      if(document.getElementById("materialSelect").value == "metal"){
+        document.getElementById("previewMaterial").setAttribute("href","img/metal.jpg");
+      }
+      else{
+        document.getElementById("previewMaterial").setAttribute("href","img/wood.jpg");
+      }
+      console.log("Form has changed.");
+    });
+  </script>
+
+  <!-- Libraries/self-hosted -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@node-wot/browser-bundle@latest/dist/wot-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/socket.io@3.1.2/client-dist/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/rdflib@2.2.6/dist/rdflib.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/blockly_compressed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/blocks_compressed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/msg/en.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/javascript_compressed.js"></script>
+
+  <!-- Precompiled handlebars templates -->
+  <script src='./templates/templates.js'></script>
+
+</body>
+
+</html>

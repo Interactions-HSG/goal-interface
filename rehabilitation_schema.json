@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/rehabilitation.schema.json",
+  "title": "UC2 Rehabilitation",
+  "description": "A plan for a patients rehabilitation",
+  "type": "object",
+  "properties": {
+    "patient": {
+      "description": "The patient that is to be assigned a procedure",
+      "type": "string"
+    },
+    "rehab_plan": {
+      "description": "The method that will be used on the patient",
+      "type": "string"
+    }
+  },
+  "required": ["patient", "plan"]
+}
