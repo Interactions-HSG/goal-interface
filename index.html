@@ -78,7 +78,8 @@
         <label for="sizey">Size Y:</label><br>
         <input type="number" id="sizey" name="sizey">
       </div>
-      <input type="submit" value="Submit">
+      <!--input type="submit" value="Submit"-->
+	  <button id = "submit-button" onclick="submitForm()">Submit</button> 
       </form>
     </div>
     <div id="previewImage">
@@ -103,21 +104,70 @@
   <!-- Script imports and startup call -->
 
   <script type="text/javascript">
+  //const axios = require('axios');
+    var goal = {"material": "metal", "process": "laser", "text": "", "posx": 45, "posy": 70, "sizex": 0, "sizey": 0}
     var form = document.getElementById("manufacturingForm");
     form.addEventListener("input", function (){
       document.getElementById("previewText").textContent = document.getElementById("text").value;
       var x_text = document.getElementById("posx").value;
       var y_text = document.getElementById("posy").value;
       document.getElementById("previewText").setAttribute("x", x_text);
+	  goal.posx = x_text
       document.getElementById("previewText").setAttribute("y", y_text);
+	  goal.posy = y_text
       if(document.getElementById("materialSelect").value == "metal"){
         document.getElementById("previewMaterial").setAttribute("href","img/metal.jpg");
+		goal.material = "metal"
       }
       else{
         document.getElementById("previewMaterial").setAttribute("href","img/wood.jpg");
+		goal.material = "wood"
       }
+	  if (document.getElementById("processSelect").value == "Laser"){
+	  goal.process = "laser"
+	  } else {
+	  goal.process = "engraving"
+	  }
+	  var size_x = document.getElementById("sizex").value;
+	  goal.sizex = size_x
+      var size_y = document.getElementById("sizey").value;
+	  goal.sizey = size_y
+	  goal.text = document.getElementById("text").value
       console.log("Form has changed.");
     });
+	var uri = "http://localhost:8080/agents/manager/message";
+	/*var button = document.getElementById("submit-button");
+	console.log(button)
+	button.onclick = function (){
+	console.log("submit");
+	axios.post(uri, goal)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+	};*/
+	
+	function setText(){
+	console.log("set text")
+	text = document.getElementById("text").value
+	print(text)
+	goal.text = text
+	
+	};
+	
+	function submitForm(){
+	console.log("submit");
+	console.log(goal)
+	axios.post(uri, goal)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+	}
   </script>
 
   <!-- Libraries/self-hosted -->
@@ -131,6 +181,7 @@
   <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/blocks_compressed.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/msg/en.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/blockly@6.20210701.0/javascript_compressed.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <!-- Precompiled handlebars templates -->
   <script src='./templates/templates.js'></script>
