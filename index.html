@@ -9,8 +9,8 @@
 
   <link rel="stylesheet" type="text/css" href="./css/header.css">
   <link rel="stylesheet" type="text/css" href="./css/manufacturing.css">
-  <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
-  <link rel="stylesheet" type="text/css" href="./css/material.min.css">
+  <!--link rel="stylesheet" type="text/css" href="./css/dashboard.css"-->
+  <!--link rel="stylesheet" type="text/css" href="./css/material.min.css"-->
   <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -46,8 +46,8 @@
       <div>
         <label for="material">Material:</label><br>
         <select class="form-control" required="required" id="materialSelect">
+		  <option value="wood">Wood</option>
           <option value="metal">Metal</option>
-          <option value="wood">Wood</option>
         </select>
         <br>
       </div>
@@ -105,7 +105,7 @@
 
   <script type="text/javascript">
   //const axios = require('axios');
-    var goal = {"material": "metal", "process": "laser", "text": "", "posx": 45, "posy": 70, "sizex": 0, "sizey": 0}
+    var goal = {material: "wood", process: "laser", text: "", posx: 45, posy: 70, sizex: 0, sizey: 0}
     var form = document.getElementById("manufacturingForm");
     form.addEventListener("input", function (){
       document.getElementById("previewText").textContent = document.getElementById("text").value;
@@ -159,14 +159,15 @@
 	
 	function submitForm(){
 	console.log("submit");
-	console.log(goal)
 	axios.post(uri, goal)
   .then(function (response) {
     console.log(response);
   })
   .catch(function (error) {
     console.log(error);
+
   });
+  
 	}
   </script>
 
@@ -184,7 +185,7 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <!-- Precompiled handlebars templates -->
-  <script src='./templates/templates.js'></script>
+  <!--script src='./templates/templates.js'></script-->
 
 </body>
 
