@@ -78,6 +78,10 @@
         <label for="sizey">Size Y:</label><br>
         <input type="number" id="sizey" name="sizey">
       </div>
+	  <div>
+        <label for="sizey">Font Size:</label><br>
+        <input type="number" id="fontsize" name="fontsize" value = "10">
+      </div>
       <!--input type="submit" value="Submit"-->
 	  <button id = "submit-button" onclick="submitForm()">Submit</button> 
       </form>
@@ -105,7 +109,7 @@
 
   <script type="text/javascript">
   //const axios = require('axios');
-    var goal = {material: "wood", process: "laser", text: "", posx: 45, posy: 70, sizex: 0, sizey: 0}
+    var goal = {material: "wood", process: "laser", text: "", posx: 45, posy: 70, sizex: 0, sizey: 0, fontsize: 10}
     var form = document.getElementById("manufacturingForm");
     form.addEventListener("input", function (){
       document.getElementById("previewText").textContent = document.getElementById("text").value;
@@ -132,6 +136,7 @@
 	  goal.sizex = size_x
       var size_y = document.getElementById("sizey").value;
 	  goal.sizey = size_y
+	  goal.fontsize = document.getElementById("fontsize").value
 	  goal.text = document.getElementById("text").value
       console.log("Form has changed.");
     });
