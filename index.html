@@ -41,64 +41,31 @@
 
   <!-- This is the container that hosts all other interface elements -->
   <div id="container">
-    <div id="manufacturingForm">
+    <div id="farmingForm">
       <form>
       <div>
-        <label for="material">Material:</label><br>
-        <select class="form-control" required="required" id="materialSelect">
-		  <option value="wood">Wood</option>
-          <option value="metal">Metal</option>
+        <label for="implement">Implement:</label><br>
+        <select class="form-control" required="required" id="implementSelect">
+		  <option value="undefined">undefined</option>
+          <option value="plough">plough</option>
+		  <option value="sprayer">sprayer</option>
+		  <option value="mower">mower</option>
+		  <option value="spreader">spreader</option>
+		  <option value="packer">packer</option>
         </select>
         <br>
       </div>
+      
       <div>
-        <label for="process">Process:</label><br>
-        <select class="form-control" required="required" id="processSelect" onchange="setText()">
-          <option value="laser">Laser</option>
-          <option value="engraving">Engraving</option>
-        </select>
+        <label for="mode">Text:</label><br>
+        <input type="text" id="mode" name="mode" onchange="setMode()">
       </div>
-      <div>
-        <label for="text">Text:</label><br>
-        <input type="text" id="text" name="text" onchange="setText()">
-      </div>
-      <div>
-        <label for="posx">Position X:</label><br>
-        <input type="number" id="posx" name="posx" value="45">
-      </div>
-      <div>
-        <label for="posy">Position Y:</label><br>
-        <input type="number" id="posy" name="posy" value="70">
-      </div>
-      <div>
-        <label for="sizex">Size X:</label><br>
-        <input type="number" id="sizex" name="sizex">
-      </div>
-      <div>
-        <label for="sizey">Size Y:</label><br>
-        <input type="number" id="sizey" name="sizey">
-      </div>
-	  <div>
-        <label for="sizey">Font Size:</label><br>
-        <input type="number" id="fontsize" name="fontsize" value = "10">
-      </div>
+      
+      
+      
       <!--input type="submit" value="Submit"-->
 	  <button id = "submit-button" onclick="submitForm()">Submit</button> 
       </form>
-    </div>
-    <div id="previewImage">
-      <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-        <style>
-          .small { font: italic 13px sans-serif; }
-          .heavy { font: bold 30px sans-serif; }
-      
-          /* Note that the color of the text is set with the    *
-           * fill property, the color property is for HTML only */
-          .Rrrrr { font: italic 40px serif; fill: red; }
-        </style>
-        <image id="previewMaterial" href="img/wood.jpg" height="120" width="120"/>
-        <text id="previewText" x="70" y="100" class="small"></text>
-      </svg>
     </div>
   </div>
 
@@ -109,35 +76,12 @@
 
   <script type="text/javascript">
   //const axios = require('axios');
-    var goal = {material: "wood", process: "laser", text: "", posx: 45, posy: 70, sizex: 0, sizey: 0, fontsize: 10}
-    var form = document.getElementById("manufacturingForm");
+    //var goal = {material: "wood", process: "laser", text: "", posx: 45, posy: 70, sizex: 0, sizey: 0, fontsize: 10}
+	var goal = {implement: "undefined", "mode": ""}
+    var form = document.getElementById("farmingForm");
     form.addEventListener("input", function (){
-      document.getElementById("previewText").textContent = document.getElementById("text").value;
-      var x_text = document.getElementById("posx").value;
-      var y_text = document.getElementById("posy").value;
-      document.getElementById("previewText").setAttribute("x", x_text);
-	  goal.posx = x_text
-      document.getElementById("previewText").setAttribute("y", y_text);
-	  goal.posy = y_text
-      if(document.getElementById("materialSelect").value == "metal"){
-        document.getElementById("previewMaterial").setAttribute("href","img/metal.jpg");
-		goal.material = "metal"
-      }
-      else{
-        document.getElementById("previewMaterial").setAttribute("href","img/wood.jpg");
-		goal.material = "wood"
-      }
-	  if (document.getElementById("processSelect").value == "Laser"){
-	  goal.process = "laser"
-	  } else {
-	  goal.process = "engraving"
-	  }
-	  var size_x = document.getElementById("sizex").value;
-	  goal.sizex = size_x
-      var size_y = document.getElementById("sizey").value;
-	  goal.sizey = size_y
-	  goal.fontsize = document.getElementById("fontsize").value
-	  goal.text = document.getElementById("text").value
+	  var implement = document.getElementById("implement").value;
+	  goal.implement = implement;
       console.log("Form has changed.");
     });
 	var uri = "http://localhost:8080/agents/manager/message";
@@ -154,11 +98,11 @@
   });
 	};*/
 	
-	function setText(){
-	console.log("set text")
-	text = document.getElementById("text").value
-	print(text)
-	goal.text = text
+	function setMode(){
+	console.log("set mode")
+	mode = document.getElementById("mode").value
+	print(mode)
+	goal.mode = mode
 	
 	};
 	
