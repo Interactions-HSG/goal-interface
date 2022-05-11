@@ -60,6 +60,10 @@
         <label for="mode">Mode:</label><br>
         <input type="text" id="mode" name="mode" onchange="setMode()">
       </div>
+	  <div>
+        <label for="mode">Field:</label><br>
+        <input type="text" id="field" name="field" onchange="setField()">
+      </div>
       
       
       
@@ -77,7 +81,7 @@
   <script type="text/javascript">
   //const axios = require('axios');
     //var goal = {material: "wood", process: "laser", text: "", posx: 45, posy: 70, sizex: 0, sizey: 0, fontsize: 10}
-	var goal = {implement: "undefined", "mode": ""}
+	var goal = {implement: "undefined", "mode": ""; field: ""}
     var form = document.getElementById("farmingForm");
     form.addEventListener("input", function (){
 	  var implement = document.getElementById("implement").value;
@@ -103,6 +107,14 @@
 	mode = document.getElementById("mode").value
 	print(mode)
 	goal.mode = mode
+	
+	};
+	
+	function setField(){
+	console.log("set field")
+	field = document.getElementById("field").value
+	print(field)
+	goal.field = field
 	
 	};
 	
