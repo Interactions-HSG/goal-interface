@@ -140,7 +140,12 @@
 	  goal.text = document.getElementById("text").value
       console.log("Form has changed.");
     });
-	var uri = "http://edge.fritz.box:8888/agents/manager/message";
+	//var uri = "http://edge.fritz.box:8888/agents/manager/message";
+	//const urlParams = new URLSearchParams(window.location.search);
+    //const yggdrasilUrl = "@@EDGE_BASE_URL@@";
+	const yggdrasilUrl = "http://localhost:8080";
+	var uri = ""+yggdrasilUrl+"/agents/manager/message";
+	console.log(uri)
 	/*var button = document.getElementById("submit-button");
 	console.log(button)
 	button.onclick = function (){
