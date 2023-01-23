@@ -6,3 +6,4 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 ADD . /
 ENTRYPOINT ["python3"]
 CMD [ "-m","http.server"]
+EXPOSE 8000
