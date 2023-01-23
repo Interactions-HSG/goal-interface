@@ -63,6 +63,18 @@
         <input type="text" id="text" name="text" onchange="setText()">
       </div>
       <div>
+        <label for="text">Font:</label><br>
+        <input type="text" id="font" name="font" onchange="setFont()">
+      </div>
+        <div>
+          <label for="text">Variant:</label><br>
+          <input type="text" id="variant" name="variant" onchange="setVariant()">
+        </div>
+        <div>
+          <label for="text">Position Reference:</label><br>
+          <input type="text" id="positionReference" name="positionReference" onchange="setPositionReference()">
+        </div>
+      <div>
         <label for="posx">Position X:</label><br>
         <input type="number" id="posx" name="posx" value="45">
       </div>
@@ -70,17 +82,13 @@
         <label for="posy">Position Y:</label><br>
         <input type="number" id="posy" name="posy" value="70">
       </div>
-      <div>
-        <label for="sizex">Size X:</label><br>
-        <input type="number" id="sizex" name="sizex">
-      </div>
-      <div>
-        <label for="sizey">Size Y:</label><br>
-        <input type="number" id="sizey" name="sizey">
-      </div>
 	  <div>
-        <label for="sizey">Font Size:</label><br>
-        <input type="number" id="fontsize" name="fontsize" value = "10">
+        <label for="sizey">Text Width:</label><br>
+        <input type="number" id="textWidth" name="textWidth" value = "10">
+      </div>
+      <div>
+        <label for="sizey">Laser On:</label><br>
+        <input type="text" id="laserOn" name="laserOn", onchange = "setLaserOn()">
       </div>
       <!--input type="submit" value="Submit"-->
 	  <button id = "submit-button" onclick="submitForm()">Submit</button> 
@@ -109,7 +117,7 @@
 
   <script type="text/javascript">
   //const axios = require('axios');
-    var goal = {material: "wood", process: "laser", text: "", posx: 45, posy: 70, sizex: 0, sizey: 0, fontsize: 10}
+    var goal = {material: "wood", process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 45, posy: 70, textWidth: 10, laserOn: true}
     var form = document.getElementById("manufacturingForm");
     form.addEventListener("input", function (){
       document.getElementById("previewText").textContent = document.getElementById("text").value;
@@ -132,10 +140,6 @@
 	  } else {
 	  goal.process = "engraving"
 	  }
-	  var size_x = document.getElementById("sizex").value;
-	  goal.sizex = size_x
-      var size_y = document.getElementById("sizey").value;
-	  goal.sizey = size_y
 	  goal.fontsize = document.getElementById("fontsize").value
 	  goal.text = document.getElementById("text").value
       console.log("Form has changed.");
@@ -166,6 +170,35 @@
 	goal.text = text
 	
 	};
+
+  function setFont(){
+	font = document.getElementById("font").value
+	goal.font = font
+	
+	};
+
+  function setVariant(){
+	variant = document.getElementById("variant").value
+	goal.variant = variant
+	
+	};
+
+  function setPositionReference(){
+	positionReference= document.getElementById("positionReference").value
+	goal.positionReference = positionReference
+	
+	};
+
+  function setLaserOn(){
+  console.log("set laserOn")
+	laserOnText = document.getElementById("laserOn").value
+  if (laserOnText == "true"){
+    goal.laserOn = true
+  } else {
+    goal.laserOn = false
+  }
+
+  };
 	
 	function submitForm(){
 	console.log("submit");
