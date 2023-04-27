@@ -43,19 +43,12 @@
   <div id="container">
     <div id="manufacturingForm">
       <form>
-      <div>
-        <label for="material">Material:</label><br>
-        <select class="form-control" required="required" id="materialSelect">
-		  <option value="wood">Wood</option>
-          <option value="metal">Metal</option>
-        </select>
-        <br>
-      </div>
+
       <div>
         <label for="process">Process:</label><br>
         <select class="form-control" required="required" id="processSelect" onchange="setText()">
-          <option value="laser">Laser</option>
-          <option value="engraving">Engraving</option>
+          <option value="laser">Engraving-Laser</option>
+          <option value="milling">Milling</option>
         </select>
       </div>
       <div>
@@ -70,43 +63,25 @@
           <label for="variant">Variant:</label><br>
           <input type="text" id="variant" name="variant" onchange="setVariant()">
         </div>
-        <div>
-          <label for="positionReference">Position Reference:</label><br>
-          <input type="text" id="positionReference" name="positionReference" onchange="setPositionReference()">
-        </div>
       <div>
         <label for="posx">Position X:</label><br>
-        <input type="number" id="posx" name="posx" value="45">
+        <input type="number" id="posx" name="posx" value="0" onchange="setPosx()">
       </div>
       <div>
         <label for="posy">Position Y:</label><br>
-        <input type="number" id="posy" name="posy" value="70">
+        <input type="number" id="posy" name="posy" value="0" onchange="setPosy()">
       </div>
 	  <div>
         <label for="textWidth">Text Width:</label><br>
-        <input type="number" id="textWidth" name="textWidth" value = "10", onchange="setTextWidth()">
+        <input type="number" id="textWidth" name="textWidth" value = "10" onchange="setTextWidth()">
       </div>
       <div>
-        <label for="laserOn">Laser On:</label><br>
-        <input type="text" id="laserOn" name="laserOn", onchange = "setLaserOn()">
+        <label for="test">Test Mode:</label><br>
+        <input type="text" id="test" name="test", onchange = "setTest()">
       </div>
       <!--input type="submit" value="Submit"-->
 	  <button id = "submit-button" onclick="submitForm()">Submit</button> 
       </form>
-    </div>
-    <div id="previewImage">
-      <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-        <style>
-          .small { font: italic 13px sans-serif; }
-          .heavy { font: bold 30px sans-serif; }
-      
-          /* Note that the color of the text is set with the    *
-           * fill property, the color property is for HTML only */
-          .Rrrrr { font: italic 40px serif; fill: red; }
-        </style>
-        <image id="previewMaterial" href="img/wood.jpg" height="120" width="120"/>
-        <text id="previewText" x="70" y="100" class="small"></text>
-      </svg>
     </div>
   </div>
 
@@ -117,28 +92,16 @@
 
   <script type="text/javascript">
   //const axios = require('axios');
-    var goal = {material: "wood", process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 45, posy: 70, textWidth: 10, laserOn: false}
+    var goal = {process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 0, posy: 0, textWidth: 10, test: false}
     var form = document.getElementById("manufacturingForm");
     form.addEventListener("input", function (){
-      document.getElementById("previewText").textContent = document.getElementById("text").value;
+      //document.getElementById("previewText").textContent = document.getElementById("text").value;
       var x_text = document.getElementById("posx").value;
       var y_text = document.getElementById("posy").value;
-      document.getElementById("previewText").setAttribute("x", x_text);
-	  goal.posx = parseInt(x_text)
-      document.getElementById("previewText").setAttribute("y", y_text);
-	  goal.posy = parseInt(y_text)
-      if(document.getElementById("materialSelect").value == "metal"){
-        document.getElementById("previewMaterial").setAttribute("href","img/metal.jpg");
-		goal.material = "metal"
-      }
-      else{
-        document.getElementById("previewMaterial").setAttribute("href","img/wood.jpg");
-		goal.material = "wood"
-      }
 	  if (document.getElementById("processSelect").value == "laser"){
 	  goal.process = "laser"
 	  } else {
-	  goal.process = "engraving"
+	  goal.process = "milling"
 	  }
 	  goal.fontsize = document.getElementById("fontsize").value
     console.log("Update text width")
@@ -153,6 +116,8 @@
 	//const urlParams = new URLSearchParams(window.location.search);
     //const yggdrasilUrl = "@@EDGE_BASE_URL@@";
 	const yggdrasilUrl = "http://localhost:8080";
+  //const yggdrasilUrl = "http://130.82.171.209:8888";
+  //const yggdrasilUrl = "http://edge.fritz.box:8888"
 	var uri = ""+yggdrasilUrl+"/agents/manager/message";
 	console.log(uri)
 	/*var button = document.getElementById("submit-button");
@@ -198,25 +163,38 @@
 	
 	};
 
+  function setPosx(){
+    console.log("set posx")
+    posx = document.getElementById("posx").value
+    goal.posx = parseInt(posx, 10)
+  }
+
+  function setPosy(){
+    console.log("set posy")
+    posx = document.getElementById("posy").value
+    goal.posy = parseInt(posy, 10)
+  }
+
   function setTextWidth(){
     console.log("set text width")
     textWidth = document.getElementById("textWidth").value
     goal.textWidth = parseInt(textWidth, 10)
   }
 
-  function setLaserOn(){
-  console.log("set laserOn")
-	laserOnText = document.getElementById("laserOn").value
+  function setTest(){
+  console.log("set test")
+	laserOnText = document.getElementById("test").value
   if (laserOnText == "true"){
-    goal.laserOn = true
+    goal.test = true
   } else {
-    goal.laserOn = false
+    goal.test = false
   }
 
   };
 	
 	function submitForm(){
 	console.log("submit");
+  console.log("goal: "+goal);
 	axios.post(uri, goal)
   .then(function (response) {
     console.log(response);
