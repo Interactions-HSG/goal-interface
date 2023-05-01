@@ -53,31 +53,31 @@
       </div>
       <div>
         <label for="text">Text:</label><br>
-        <input type="text" id="text" name="text" onchange="setText()">
+        <input type="text" id="text" name="text">
       </div>
       <div>
         <label for="font">Font:</label><br>
-        <input type="text" id="font" name="font" onchange="setFont()">
+        <input type="text" id="font" name="font">
       </div>
         <div>
           <label for="variant">Variant:</label><br>
-          <input type="text" id="variant" name="variant" onchange="setVariant()">
+          <input type="text" id="variant" name="variant">
         </div>
       <div>
         <label for="posx">Position X:</label><br>
-        <input type="number" id="posx" name="posx" value="0" onchange="setPosx()">
+        <input type="number" id="posx" name="posx" value="0">
       </div>
       <div>
         <label for="posy">Position Y:</label><br>
-        <input type="number" id="posy" name="posy" value="0" onchange="setPosy()">
+        <input type="number" id="posy" name="posy" value="0">
       </div>
 	  <div>
         <label for="textWidth">Text Width:</label><br>
-        <input type="number" id="textWidth" name="textWidth" value = "10" onchange="setTextWidth()">
+        <input type="number" id="textWidth" name="textWidth" value = "10">
       </div>
       <div>
         <label for="test">Test Mode:</label><br>
-        <input type="text" id="test" name="test", onchange = "setTest()">
+        <input type="text" id="test" name="test">
       </div>
       <!--input type="submit" value="Submit"-->
 	  <button id = "submit-button" onclick="submitForm()">Submit</button> 
@@ -92,8 +92,8 @@
 
   <script type="text/javascript">
   //const axios = require('axios');
-    var goal = {process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 0, posy: 0, textWidth: 10, test: false}
-    var form = document.getElementById("manufacturingForm");
+    //var goal = {process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 0, posy: 0, textWidth: 10, test: false}
+    /*var form = document.getElementById("manufacturingForm");
     form.addEventListener("input", function (){
       //document.getElementById("previewText").textContent = document.getElementById("text").value;
       var x_text = document.getElementById("posx").value;
@@ -111,7 +111,7 @@
     console.log("new text width: "+goal.textWidth)
 	  goal.text = document.getElementById("text").value
       console.log("Form has changed.");
-    });
+    });*/
 	//var uri = "http://edge.fritz.box:8888/agents/manager/message";
 	//const urlParams = new URLSearchParams(window.location.search);
     //const yggdrasilUrl = "@@EDGE_BASE_URL@@";
@@ -194,6 +194,25 @@
 	
 	function submitForm(){
 	console.log("submit");
+  var goal = {process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 0, posy: 0, textWidth: 10, test: false}
+  /*setText()
+  setFont()
+  setVariant()
+  setPositionReference()
+  setPosx()
+  setPosy()
+  setTextWidth()
+  setTest()*/
+  goal.text = document.getElementById("text").value
+  goal.font = document.getElementById("font").value
+  goal.variant = document.getElementById("font").value
+  goal.positionReference = document.getElementById("positionReference").value
+  goal.posx = parseInt(document.getElementById("posx"),10)
+  goal.posy = parseInt(document.getElementById("posy"),10)
+  goal.textWidth= parseInt(document.getElementById("posy"),10)
+  if (document.getElementById("test").value == "true"){
+    goal.test = true
+  }
   console.log("goal: "+goal);
 	axios.post(uri, goal)
   .then(function (response) {
