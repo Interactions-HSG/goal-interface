@@ -214,6 +214,7 @@
     goal.test = true
   }
   console.log("goal: "+goal);
+  alert("sends goal: "+ goal + " to: "+ uri);
 	axios.post(uri, goal)
   .then(function (response) {
     console.log(response);
