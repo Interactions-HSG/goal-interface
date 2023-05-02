@@ -63,6 +63,10 @@
           <label for="variant">Variant:</label><br>
           <input type="text" id="variant" name="variant">
         </div>
+        <div>
+          <label for="positionReference">Position Reference:</label><br>
+          <input type="text" id="positionReference" name="positionReference">
+        </div>
       <div>
         <label for="posx">Position X:</label><br>
         <input type="number" id="posx" name="posx" value="0">
@@ -193,25 +197,11 @@
   };
 	
 	function submitForm(){
-alert("submit form");
-alert("submit form 2");
 	console.log("submit");
   var goal = {process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 0, posy: 0, textWidth: 10, test: false}
-alert("goal v1: "+ JSON.stringify(goal));
-  /*setText()
-  setFont()
-  setVariant()
-  setPositionReference()
-  setPosx()
-  setPosy()
-  setTextWidth()
-  setTest()*/
   goal.text = document.getElementById("text").value
-alert("text set with value: "+ goal.text);
   goal.font = document.getElementById("font").value
-alert("font set with value: "+goal.font);
   goal.variant = document.getElementById("font").value
-alert("variant set with value: "+ goal.variant);
   goal.positionReference = document.getElementById("positionReference").value
 alert("position reference set with value: "+goal.positionReference);
   goal.posx = parseInt(document.getElementById("posx").value,10)
@@ -223,6 +213,7 @@ alert("text width set with value: "+goal.textWidth);
   if (document.getElementById("test").value == "true"){
     goal.test = true
   }
+  alert("test mode set with value: "+goal.test);
   console.log("goal: "+goal);
   alert("sends goal");
 alert("goal v2: "+ JSON.stringify(goal));
