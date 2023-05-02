@@ -203,21 +203,14 @@
   goal.font = document.getElementById("font").value
   goal.variant = document.getElementById("font").value
   goal.positionReference = document.getElementById("positionReference").value
-alert("position reference set with value: "+goal.positionReference);
   goal.posx = parseInt(document.getElementById("posx").value,10)
-alert("pos x set with value: "+goal.posx);
   goal.posy = parseInt(document.getElementById("posy").value,10)
-alert("pos y set with value: "+ goal.posy);
   goal.textWidth= parseInt(document.getElementById("textWidth").value,10)
-alert("text width set with value: "+goal.textWidth);
   if (document.getElementById("test").value == "true"){
     goal.test = true
   }
-  alert("test mode set with value: "+goal.test);
   console.log("goal: "+goal);
-  alert("sends goal");
-alert("goal v2: "+ JSON.stringify(goal));
-alert("uri: "+uri);
+alert("goal: "+ JSON.stringify(goal) + ", uri: "+uri);
 	axios.post(uri, goal)
   .then(function (response) {
     console.log(response);
