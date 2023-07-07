@@ -46,10 +46,11 @@
 
       <div>
         <label for="process">Process:</label><br>
-        <select class="form-control" required="required" id="processSelect" onchange="setText()">
+        <input type="text" id="process" name="process">
+        <!--select class="form-control" required="required" id="processSelect">
           <option value="laser">Engraving-Laser</option>
           <option value="milling">Milling</option>
-        </select>
+        </select-->
       </div>
       <div>
         <label for="text">Text:</label><br>
@@ -62,6 +63,10 @@
         <div>
           <label for="variant">Variant:</label><br>
           <input type="text" id="variant" name="variant">
+        </div>
+        <div>
+          <label for="alignment">Alignment:</label><br>
+          <input type="text" id="alignment" name="alignment">
         </div>
         <div>
           <label for="positionReference">Position Reference:</label><br>
@@ -95,129 +100,48 @@
   <!-- Script imports and startup call -->
 
   <script type="text/javascript">
-  //const axios = require('axios');
-    //var goal = {process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 0, posy: 0, textWidth: 10, test: false}
-    /*var form = document.getElementById("manufacturingForm");
-    var goal = {process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 0, posy: 0, textWidth: 10, test: false}
-    var form = document.getElementById("manufacturingForm");
-    form.addEventListener("input", function (){
-      //document.getElementById("previewText").textContent = document.getElementById("text").value;
-      var x_text = document.getElementById("posx").value;
-      var y_text = document.getElementById("posy").value;
-      document.getElementById("previewText").setAttribute("x", x_text);
-	  goal.posx = parseInt(x_text)
-      document.getElementById("previewText").setAttribute("y", y_text);
-	  goal.posy = parseInt(y_text)
-	  if (document.getElementById("processSelect").value == "laser"){
-	  goal.process = "laser"
-	  } else {
-	  goal.process = "milling"
-	  }
-	  goal.fontsize = document.getElementById("fontsize").value
-    console.log("Update text width")
-    width = document.getElementById("textWidth").value
-    document.getElementById("previewText").setAttribute("width", width);
-    goal.textWidth = width
-    console.log("new text width: "+goal.textWidth)
-	  goal.text = document.getElementById("text").value
-      console.log("Form has changed.");
-    });*/
-	//var uri = "http://edge.fritz.box:8888/agents/manager/message";
-	//const urlParams = new URLSearchParams(window.location.search);
-    //const yggdrasilUrl = "@@EDGE_BASE_URL@@";
-
 	//const yggdrasilUrl = "http://localhost:8080";
   //const yggdrasilUrl = "http://130.82.171.209:8888";
   const yggdrasilUrl = "http://edge.fritz.box:8888"
 	var uri = ""+yggdrasilUrl+"/agents/manager/message";
 	console.log(uri)
-	/*var button = document.getElementById("submit-button");
-	console.log(button)
-	button.onclick = function (){
-	console.log("submit");
-	axios.post(uri, goal)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-	};*/
-
-
-	function setText(){
-	console.log("set text")
-	text = document.getElementById("text").value
-	print(text)
-	goal.text = text
-	
-	};
-
-  function setFont(){
-    console.log("set font")
-	font = document.getElementById("font").value
-	goal.font = font
-	
-	};
-
-  function setVariant(){
-  console.log("set variant")
-	variant = document.getElementById("variant").value
-	goal.variant = variant
-	
-	};
-
-  function setPositionReference(){
-    console.log("set position reference")
-	positionReference= document.getElementById("positionReference").value
-	goal.positionReference = positionReference
-	
-	};
-
-  function setPosx(){
-    console.log("set posx")
-    posx = document.getElementById("posx").value
-    goal.posx = parseInt(posx, 10)
-  }
-
-  function setPosy(){
-    console.log("set posy")
-    posx = document.getElementById("posy").value
-    goal.posy = parseInt(posy, 10)
-  }
-
-  function setTextWidth(){
-    console.log("set text width")
-    textWidth = document.getElementById("textWidth").value
-    goal.textWidth = parseInt(textWidth, 10)
-  }
-
-  function setTest(){
-  console.log("set test")
-	laserOnText = document.getElementById("test").value
-  if (laserOnText == "true"){
-    goal.test = true
-  } else {
-    goal.test = false
-  }
-
-  };
 	
 	function submitForm(){
 	console.log("submit");
-  var goal = {process: "laser", text: "", font: "", variant: "", positionReference: "", posx: 0, posy: 0, textWidth: 10, test: false}
+  var goal = {process: "laser", text: "IntellIoT", font: "ABeeZee", variant: "regular", alignment: "left", positionReference: "center", posx: 10, posy: 10, textWidth: 10, test: false}
+  if (document.getElementById("process").value == "milling"){
+    goal.process = "milling"
+  } else{
+    goal.process = "laser"
+  }
   goal.text = document.getElementById("text").value
+  if (goal.text == ""){
+    goal.text == "IntellIoT"
+  }
   goal.font = document.getElementById("font").value
+  if (goal.font == ""){
+    goal.font = "ABeeZee"
+  }
   goal.variant = document.getElementById("variant").value
+  if (goal.variant == ""){
+    goal.variant = "regular"
+  }
+  goal.alignment = document.getElementById("alignment").value
+  if (goal.alignment == ""){
+    goal.alignment = "left"
+  }
   goal.positionReference = document.getElementById("positionReference").value
+  if (goal.positionReference == ""){
+    goal.positionReference = "center"
+  }
   goal.posx = parseInt(document.getElementById("posx").value,10)
   goal.posy = parseInt(document.getElementById("posy").value,10)
   goal.textWidth= parseInt(document.getElementById("textWidth").value,10)
   if (document.getElementById("test").value == "true"){
     goal.test = true
   }
-  console.log("goal: "+goal);
-alert("goal: "+ JSON.stringify(goal) + ", uri: "+uri);
+  console.log("goal: "+JSON.stringify(goal));
+  console.log("uri: ", uri);
 	axios.post(uri, goal)
   .then(function (response) {
     console.log(response);
