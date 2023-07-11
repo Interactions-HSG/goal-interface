@@ -88,6 +88,10 @@
         <label for="test">Test Mode:</label><br>
         <input type="text" id="test" name="test">
       </div>
+      <div>
+        <label for="confidence">Confidence HIL Service:</label><br>
+        <input type="number" id="confidence" name="confidence", value = "95">
+      </div>
       <!--input type="submit" value="Submit"-->
 	  <button id = "submit-button" onclick="submitForm()">Submit</button> 
       </form>
@@ -108,7 +112,7 @@
 	
 	function submitForm(){
 	console.log("submit");
-  var goal = {process: "laser", text: "IntellIoT", font: "ABeeZee", variant: "regular", alignment: "left", positionReference: "center", posx: 10, posy: 10, textWidth: 10, test: false}
+  var goal = {process: "laser", text: "IntellIoT", font: "ABeeZee", variant: "regular", alignment: "left", positionReference: "center", posx: 10, posy: 10, textWidth: 10, test: false, confidence: 95}
   if (document.getElementById("process").value == "milling"){
     goal.process = "milling"
   } else{
@@ -140,6 +144,7 @@
   if (document.getElementById("test").value == "true"){
     goal.test = true
   }
+  goal.confidence = parseInt(document.getElementById("confidence").value,95)
   console.log("goal: "+JSON.stringify(goal));
   console.log("uri: ", uri);
 	axios.post(uri, goal)
