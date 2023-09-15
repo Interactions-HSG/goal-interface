@@ -14,6 +14,8 @@ app.use(cors())
 
 app.use(express.json())
 
+app.use(express.static('public'))
+
 app.get('/', (req, res) => {
   res.statusCode = 200;
   res.setHeader("Content-Type", "text/html");
