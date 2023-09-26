@@ -15,6 +15,8 @@ app.use(cors())
 app.use(express.json())
 
 app.use(express.static('public'))
+//app.use('/static', express.static(__dirname + '/public'));
+//app.use("/fonts", express.static(__dirname + '/public/fonts'));
 
 app.get('/', (req, res) => {
   res.statusCode = 200;
@@ -23,8 +25,16 @@ app.get('/', (req, res) => {
 });
 
 function displayNotification(notification){
-    state = notification["status"] //Possible states: refused, accepted, completed.
-    message = "The goal has status: "+state
+    state = notification["status"] //Possible states: busy/agent is still busy and not ready to accept another goal; please try later, accepted, completed.
+    message = ""
+    if (state == "busy"){
+      message = "The agent is still busy and not ready to accept another goal; please try later"
+    }
+    else if (state == "accepted"){
+      message = "The agent is working towards the goal"
+    } else if (state == "completed"){
+      message = "The agent has completed the goal."
+    }
     io.emit('goal', {'message': message})
     console.log(message)
 }
