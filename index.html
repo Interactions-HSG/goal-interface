@@ -207,6 +207,7 @@
   var socket = io();
   socket.on('goal', (msg) => {
     message = msg['message']
+    console.log("message received: "+message)
     alert(message)
   });
 </script>

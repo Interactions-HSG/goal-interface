@@ -25,15 +25,24 @@ app.get('/', (req, res) => {
 });
 
 function displayNotification(notification){
-    state = notification["status"] //Possible states: busy/agent is still busy and not ready to accept another goal; please try later, accepted, completed.
+    let state = notification["status"] //Possible states: busy/agent is still busy and not ready to accept another goal; please try later, accepted, completed.
     message = ""
-    if (state == "busy"){
-      message = "The agent is still busy and not ready to accept another goal; please try later"
-    }
-    else if (state == "accepted"){
-      message = "The agent is working towards the goal"
-    } else if (state == "completed"){
-      message = "The agent has completed the goal."
+    switch(state){
+      case "busy":
+        message = "The agent is still busy and not ready to accept another goal; please try later."
+        break;
+      case "accepted":
+        message = "The agent is working towards the goal."
+        break;
+      case "rejected":
+        message = "The goal is not valid, please reformulate it."
+        if (notification["custom"]){
+          message = message + "The reason is: "+notification["custom"]
+        }
+        break;
+      case "completed":
+        message = "The agent has completed the goal."
+        break;
     }
     io.emit('goal', {'message': message})
     console.log(message)
