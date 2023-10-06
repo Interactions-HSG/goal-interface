@@ -2,28 +2,123 @@
   display: flex;
 }
 #previewImage {
-  font-family: ABeeZee, ABeeZee-Italic, Abel, Roboto;
+  font-family: ABeeZee, ABeeZee, Abel, Alegreya, Ballet, Bandar, Boldena, Coffee, Monsieur, Parisienne, Roboto, Shooting, Star;
   flex: 1;
   width: 50%;
   position: absolute;
   right: 50px;
 }
+
+
+/* #previewImage {
+  font-family: ABeeZee, ABeeZee-Italic, Abel, Roboto;
+  flex: 1;
+  width: 50%;
+  position: absolute;
+  right: 50px;
+} */
 #manufacturingForm {
   flex: 1;
   width: 20%;
 }
 
-/*@font-face {
+@font-face {
   font-family: "ABeeZee";
-  src: url(../fonts/ABeeZee-Regular.tff) format('truetype');
+  src: url(../fonts/ABeeZee-Italic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ABeeZee";
+  src: url(../fonts/ABeeZee-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Abel";
+  src: url(../fonts/Abel-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Alegreya";
+  src: url(../fonts/Alegreya-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Ballet";
+  src: url(../fonts/Ballet-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Bandar";
+  src: url(../fonts/Bandar-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Boldena";
+  src: url(../fonts/Boldena-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Coffee";
+  src: url(../fonts/Coffee-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Monsieur";
+  src: url(../fonts/Monsieur-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Parisienne";
+  src: url(../fonts/Parisienne-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url(../fonts/Roboto-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Shooting";
+  src: url(../fonts/Shooting-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Star";
+  src: url(../fonts/Star-Regular.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 
+/* @font-face {
+  font-family: "ABeeZee";
+  src: url(../fonts/ABeeZee-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Coffee";
+  src: url(../fonts/Coffee-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/*
 @font-face {
   font-family: "ABeeZee-Italic";
-  src: url(../fonts/ABeeZee-Italic.tff) format('truetype');
+  src: url(../fonts/ABeeZee-Italic.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -32,7 +127,7 @@
 
 @font-face {
   font-family: "Abel";
-  src: url(../fonts/Abel-Regular.tff) format('truetype');
+  src: url(../fonts/Abel-Regular.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -41,7 +136,7 @@
 
 @font-face {
   font-family: "Roboto";
-  src: url(../fonts/Roboto-Regular.tff) format('truetype');
+  src: url(../fonts/Roboto-Regular.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }*/
