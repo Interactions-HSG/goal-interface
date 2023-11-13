@@ -1,0 +1,48 @@
+#container {
+  display: flex;
+}
+#previewImage {
+  font-family: ABeeZee, ABeeZee-Italic, Abel, Roboto;
+  flex: 1;
+  width: 50%;
+  position: absolute;
+  right: 50px;
+}
+#manufacturingForm {
+  flex: 1;
+  width: 20%;
+}
+
+/*@font-face {
+  font-family: "ABeeZee";
+  src: url(../fonts/ABeeZee-Regular.tff) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: "ABeeZee-Italic";
+  src: url(../fonts/ABeeZee-Italic.tff) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+@font-face {
+  font-family: "Abel";
+  src: url(../fonts/Abel-Regular.tff) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+@font-face {
+  font-family: "Roboto";
+  src: url(../fonts/Roboto-Regular.tff) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}*/
+

@@ -15,6 +15,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 </head>
 
 <body style='overflow: auto;'>
@@ -24,11 +27,11 @@
     <div class="logo"><img src="./img/interactions-logo-pure-white.png" alt="Interactions Research Group, University of St.Gallen" class="logo"/></div>
     <div class="logo-right"><img src="./img/IntellIoT-Logo.png" alt="IntellIoT Research Project" class="logo"/></div>
 
-    <div id="settings">
+    <!--div id="settings">
       <div id="fetch-artifacts-text">Fetch Artifacts from</div>
       <select id="workspace-chooser"><option value="simulation">infrastructure-running-?</option></select>
       <!-- <div id="back-button" class="back-button"><i class="material-icons">skip_previous</i></div> -->
-    </div>
+    <!--/div-->
 
     <div id="header-options-container" class="hidden">
 
@@ -46,19 +49,48 @@
 
       <div>
         <label for="process">Process:</label><br>
-        <input type="text" id="process" name="process">
-        <!--select class="form-control" required="required" id="processSelect">
+        <!--input type="text" id="process" name="process"-->
+        <select class="form-control" required="required" id="process">
           <option value="laser">Engraving-Laser</option>
           <option value="milling">Milling</option>
-        </select-->
+        </select>
       </div>
       <div>
         <label for="text">Text:</label><br>
-        <input type="text" id="text" name="text">
+        <input type="text" id="text" name="text" onchange="setImage()">
       </div>
       <div>
         <label for="font">Font:</label><br>
-        <input type="text" id="font" name="font">
+        <!--input type="text" id="font" name="font" onchange="setImage()"-->
+        <select class="form-control" id="font" name="font" required="required" onchange="setImage()">
+          <option value="ABeeZee">ABeeZee</option>
+          <option value="ABeeZee-Italic">ABeeZee-Italic</option>
+          <option value="Abel">Abel</option>
+          <option value="Roboto">Roboto</option>
+          </select>
+      </div>
+      <div>
+      <label for="posx">Position X:</label><br>
+        <input type="number" id="posx" name="posx" value="35" onchange="setImage()">
+      </div>
+      <div>
+        <label for="posy">Position Y:</label><br>
+        <input type="number" id="posy" name="posy" value="70" onchange="setImage()">
+      </div>
+	  <div>
+        <label for="textWidth">Text Width:</label><br>
+        <input type="number" id="textWidth" name="textWidth" value = "10">
+      </div>
+      <div>
+      <button id = "submit-button" onclick="submitForm()">Submit</button> 
+    </div>
+      <div>
+        <label for="test">Test Mode:</label><br>
+        <input type="text" id="test" name="test">
+      </div>
+      <div>
+        <label for="confidence">Confidence HIL Service:</label><br>
+        <input type="number" id="confidence" name="confidence", value = "95">
       </div>
         <div>
           <label for="variant">Variant:</label><br>
@@ -73,30 +105,27 @@
           <input type="text" id="positionReference" name="positionReference">
         </div>
       <div>
-        <label for="posx">Position X:</label><br>
-        <input type="number" id="posx" name="posx" value="0">
-      </div>
-      <div>
-        <label for="posy">Position Y:</label><br>
-        <input type="number" id="posy" name="posy" value="0">
-      </div>
-	  <div>
-        <label for="textWidth">Text Width:</label><br>
-        <input type="number" id="textWidth" name="textWidth" value = "10">
-      </div>
-      <div>
-        <label for="test">Test Mode:</label><br>
-        <input type="text" id="test" name="test">
-      </div>
-      <div>
-        <label for="confidence">Confidence HIL Service:</label><br>
-        <input type="number" id="confidence" name="confidence", value = "95">
-      </div>
+        
+      
       <!--input type="submit" value="Submit"-->
-	  <button id = "submit-button" onclick="submitForm()">Submit</button> 
+	  
       </form>
     </div>
+  <div id="previewImage" style="top:-0px">
+    <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+      <style>
+        .small { font: italic 13px sans-serif; }
+        .heavy { font: bold 30px sans-serif; }
+    
+        /* Note that the color of the text is set with the    *
+         * fill property, the color property is for HTML only */
+        .Rrrrr { font: italic 40px serif; fill: red; }
+      </style>
+      <image id="previewMaterial" href="./img/wood.jpg" height="120" width="120"/>
+      <text id="previewText" x="35" y="70" class="small"></text>
+    </svg>
   </div>
+</div>
 
 
   
@@ -138,15 +167,19 @@
   if (goal.positionReference == ""){
     goal.positionReference = "center"
   }
-  goal.posx = parseInt(document.getElementById("posx").value,10)
-  goal.posy = parseInt(document.getElementById("posy").value,10)
+  goal.posx = parseInt(document.getElementById("posx").value,0)
+  goal.posy = parseInt(document.getElementById("posy").value,0)
   goal.textWidth= parseInt(document.getElementById("textWidth").value,10)
   if (document.getElementById("test").value == "true"){
     goal.test = true
   }
-  goal.confidence = parseInt(document.getElementById("confidence").value,10)
+  goal.confidence= parseInt(document.getElementById("confidence").value, 10)
+  console.log("confidence: "+confidence)
   console.log("goal: "+JSON.stringify(goal));
   console.log("uri: ", uri);
+  setTimeout(function(){
+    console.log("Executed after 10 second");
+}, 10000);
 	axios.post(uri, goal)
   .then(function (response) {
     console.log(response);
@@ -157,7 +190,27 @@
   });
   
 	}
+
+  function setImage(){
+    document.getElementById("previewText").textContent = document.getElementById("text").value;
+    document.getElementById("previewText").setAttribute("x", document.getElementById("posx").value)
+    document.getElementById("previewText").setAttribute("y", document.getElementById("posy").value)
+    let font = document.getElementById("font").value
+    console.log("font: "+font)
+    document.getElementById("previewText").style.fontFamily = font
+    console.log("current font: "+document.getElementById("previewText").style.fontFamily)
+  }
   </script>
+
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+  var socket = io();
+  socket.on('goal', (msg) => {
+    message = msg['message']
+    console.log("message received: "+message)
+    alert(message)
+  });
+</script>
 
   <!-- Libraries/self-hosted -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
