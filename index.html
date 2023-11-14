@@ -205,8 +205,12 @@
 
   function setImage(){
     document.getElementById("previewText").textContent = document.getElementById("text").value;
-    document.getElementById("previewText").setAttribute("x", document.getElementById("posx").value+55)
-    document.getElementById("previewText").setAttribute("y", document.getElementById("posy").value+64)
+    let x = document.getElementById("posx").value+55;
+    console.log("x: "+x)
+    document.getElementById("previewText").setAttribute("x", x);
+    let y = document.getElementById("posy").value+64;
+    document.getElementById("previewText").setAttribute("y", y);
+    console.log("y: "+y);
     let font = document.getElementById("font").value
     console.log("font: "+font)
     document.getElementById("previewText").style.fontFamily = font
