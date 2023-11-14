@@ -37,8 +37,11 @@ function displayNotification(notification){
       case "rejected":
         message = "The goal is not valid, please reformulate it."
         if (notification["custom"]){
-          message = message + "The reason is: "+notification["custom"]
+          message = message + " The reason is: "+notification["custom"]
         }
+        break;
+      case "intermediate":
+        message = notification["custom"]
         break;
       case "completed":
         message = "The agent has completed the goal."
