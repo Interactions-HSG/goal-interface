@@ -205,10 +205,12 @@
 
   function setImage(){
     document.getElementById("previewText").textContent = document.getElementById("text").value;
-    let x = document.getElementById("posx").value+55;
+    let x_num = parseInt(document.getElementById("posx").value, 10);
+    let x = x_num+55;
     console.log("x: "+x)
     document.getElementById("previewText").setAttribute("x", x);
-    let y = document.getElementById("posy").value+64;
+    let y_num= parseInt(document.getElementById("posy").value, 10);
+    let y = y_num+64;
     document.getElementById("previewText").setAttribute("y", y);
     console.log("y: "+y);
     let font = document.getElementById("font").value
