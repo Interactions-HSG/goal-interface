@@ -43,6 +43,11 @@ function displayNotification(notification){
       case "intermediate":
         message = notification["custom"]
         break;
+      case "failed":
+        message = "The goal could not be achieved."
+        if (notification["custom"]){
+          message = message + " The reason is: "+notification["custom"]
+        }
       case "completed":
         message = "The agent has completed the goal."
         break;
