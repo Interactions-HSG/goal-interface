@@ -48,6 +48,7 @@ function displayNotification(notification){
         if (notification["custom"]){
           message = message + " The reason is: "+notification["custom"]
         }
+        break;
       case "completed":
         message = "The agent has completed the goal."
         break;
